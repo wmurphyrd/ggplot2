@@ -283,26 +283,47 @@ guides_build <- function(ggrobs, theme) {
 }
 
 # S3 dispatches
+#' Guide generic functions for ggplot2
+#'
+#' Extending ggplot2 with new guides requires the implementation of an S3 class
+#' with methods for these generic functions.
+#' @name ggplot2-guide
+#' @keywords internal
+NULL
 
+#' @param guide A guide object.
+#' @param scale A \code{\link{Scale}} ggproto defining how aesthetics are mapped
+#'   to layers.
+#' @rdname ggplot2-guide
+#' @details \code{guide_train}: Configure the guide with aesthetic mapping,
+#'   range, breaks, and other information provided by the Scale. Returns the
+#'   modified guide object including a \code{hash} of the relevant properties.
+#' @seealso \code{\link[digest]{digest}} to create a \code{hash}.
 #' @export
 #' @keywords internal
 guide_train <- function(guide, scale) UseMethod("guide_train")
 
+#' @rdname ggplot2-guide
+#' @details \code{guide_merge}: When two guides have identical \code{hash}
+#'   objects, merge them into a single guide. Returns the merged guide object.
+#' @param new_guide A guide object to merge with \code{guide}.
 #' @export
 #' @keywords internal
 guide_merge <- function(guide, new_guide) UseMethod("guide_merge")
 
+#' @rdname ggplot2-guide
+#' @details \code{guide_geom}: Gather geom information from layers needed to
+#'   later render the guide. Returns the modified guide object.
+#' @param layers List of layers in the plot
+#' @param default_mapping Top-level aesthetic mappings for the plot.
 #' @export
 #' @keywords internal
 guide_geom <- function(guide, layers, default_mapping) UseMethod("guide_geom")
 
+#' @rdname ggplot2-guide
+#' @details \code{guide_gengrob}: Render the guide for display. Returns a
+#'   \code{\link[gtable]{gtable}}.
+#' @param theme The \code{\link{theme}} object for the plot.
 #' @export
 #' @keywords internal
 guide_gengrob <- function(guide, theme) UseMethod("guide_gengrob")
-
-
-
-
-
-
-
