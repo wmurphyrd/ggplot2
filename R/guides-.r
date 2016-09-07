@@ -284,10 +284,18 @@ guides_build <- function(ggrobs, theme) {
 
 # S3 dispatches
 
+#' @export
+#' @keywords internal
 guide_train <- function(...) UseMethod("guide_train")
 
+#' @export
+#' @keywords internal
 guide_merge <- function(...) UseMethod("guide_merge")
 
+#' @export
+#' @keywords internal
 guide_geom <- function(...) UseMethod("guide_geom")
 
+#' @export
+#' @keywords internal
 guide_gengrob <- function(...) UseMethod("guide_gengrob")
